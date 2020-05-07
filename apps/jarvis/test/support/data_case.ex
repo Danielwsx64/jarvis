@@ -24,6 +24,8 @@ defmodule Jarvis.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Jarvis.DataCase
+      import Jarvis.Support.Factory
+      alias Ecto.UUID
     end
   end
 
