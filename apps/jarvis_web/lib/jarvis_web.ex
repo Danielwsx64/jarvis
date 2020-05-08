@@ -88,7 +88,11 @@ defmodule JarvisWeb do
 
       import JarvisWeb.ErrorHelpers
       import JarvisWeb.Gettext
+      import JarvisWeb.Router.Helpers
+
       alias JarvisWeb.Router.Helpers, as: Routes
+      alias JarvisWeb.Endpoint
+      alias JarvisWeb.SharedView
     end
   end
 

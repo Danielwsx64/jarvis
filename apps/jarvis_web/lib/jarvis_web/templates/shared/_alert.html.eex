@@ -1,0 +1,7 @@
+<div class="ui container alert">
+  <div class="ui <%= @type %> message">
+    <i class="close icon"></i>
+
+    <%= get_flash(@conn, @type) %>
+  </div>
+</div>

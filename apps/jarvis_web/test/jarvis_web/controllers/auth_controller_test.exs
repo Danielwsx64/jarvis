@@ -67,7 +67,7 @@ defmodule JarvisWeb.AuthControllerTest do
         |> assign(:ueberauth_auth, ueberauth_auth)
         |> post(auth_path(conn, :callback, "google"))
 
-      assert redirected_to(response, 302) =~ "/home"
+      assert redirected_to(response, 302) =~ "/"
       assert get_flash(response, :info) == "Successfully authenticated."
       assert response.private.plug_session["current_user"] == user.id
     end
@@ -100,7 +100,7 @@ defmodule JarvisWeb.AuthControllerTest do
         |> assign(:ueberauth_auth, ueberauth_auth)
         |> post(auth_path(conn, :callback, "google"))
 
-      assert redirected_to(response, 302) =~ "/home"
+      assert redirected_to(response, 302) =~ "/"
       assert get_flash(response, :info) == "Successfully authenticated."
       assert user_id = response.private.plug_session["current_user"]
       assert Repo.get(Schema, user_id)

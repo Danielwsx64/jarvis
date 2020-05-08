@@ -1,0 +1,7 @@
+body > .grid.auth-new {
+  height: 100%;
+
+  & > .column {
+    max-width: 450px;
+  }
+}

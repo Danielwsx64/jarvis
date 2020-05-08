@@ -1,4 +1,3 @@
-<h2>Welcome, <%= @current_user.email %>!</h2>
-<%= form_for @conn, Routes.auth_path(@conn, :delete), fn _f -> %>
-  <%= submit "Logout", class: "btn btn-danger" %>
-<% end %>
+<div class="ui fluid container">
+  <h2>Welcome, <%= @current_user.email %>!</h2>
+</div>

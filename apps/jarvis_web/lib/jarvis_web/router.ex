@@ -28,7 +28,7 @@ defmodule JarvisWeb.Router do
   scope "/", JarvisWeb do
     pipe_through(:browser)
 
-    get("/home", HomeController, :index)
+    get("/", HomeController, :index)
 
     live("/live", PageLive, :index)
   end
