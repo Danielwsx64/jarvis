@@ -5,7 +5,7 @@ defmodule Jarvis.Accounts.Users.SchemaTest do
 
   describe "schema" do
     test "schema must has keys" do
-      Enum.each([:email, :inserted_at, :updated_at], fn key ->
+      Enum.each([:email, :image_url, :inserted_at, :updated_at], fn key ->
         assert Map.has_key?(%Schema{}, key)
       end)
     end
@@ -13,7 +13,7 @@ defmodule Jarvis.Accounts.Users.SchemaTest do
 
   describe "changeset/2" do
     test "return a valid changeset" do
-      params = %{email: "test@email.com"}
+      params = %{email: "test@email.com", image_url: "http://image.com"}
 
       changeset = Schema.changeset(%Schema{}, params)
 

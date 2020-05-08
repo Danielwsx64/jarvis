@@ -5,13 +5,14 @@ defmodule Jarvis.Accounts.Users.Schema do
 
   schema "users" do
     field(:email, :string)
+    field(:image_url, :string)
 
     timestamps()
   end
 
   def changeset(%__MODULE__{} = user, params \\ %{}) do
     user
-    |> cast(params, [:email])
+    |> cast(params, [:email, :image_url])
     |> validate_required([:email])
     |> validate_email()
     |> unique_constraint(:email)

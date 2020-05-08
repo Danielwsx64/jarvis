@@ -1,12 +1,12 @@
 defmodule Jarvis.Accounts.Users do
   alias Jarvis.Accounts.Users.{Loader, Mutator}
 
-  def get_or_create_by_email(email) do
+  def get_or_create_by_email(%{email: email} = params) do
     email
     |> Loader.get_by_email()
-    |> create_if_needed(email)
+    |> create_if_needed(params)
   end
 
-  defp create_if_needed(nil, email), do: Mutator.create(%{email: email})
+  defp create_if_needed(nil, params), do: Mutator.create(params)
   defp create_if_needed(user, _email), do: {:ok, user}
 end
