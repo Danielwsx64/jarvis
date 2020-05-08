@@ -23,11 +23,20 @@ defmodule JarvisWeb.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import JarvisWeb.ConnCase
+      import Jarvis.Support.Factory
+      import JarvisWeb.Router.Helpers
 
-      alias JarvisWeb.Router.Helpers, as: Routes
+      alias Ecto.UUID
+      alias Jarvis.Repo
 
       # The default endpoint for testing
       @endpoint JarvisWeb.Endpoint
+
+      def floki_find(html, query) do
+        html
+        |> Floki.parse_document!()
+        |> Floki.find(query)
+      end
     end
   end
 
