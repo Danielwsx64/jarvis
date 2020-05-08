@@ -1,6 +1,10 @@
 defmodule JarvisWeb.Router do
   use JarvisWeb, :router
 
+  import Phoenix.LiveDashboard.Router
+
+  alias JarvisWeb.Plugs.Authenticated
+
   pipeline :browser do
     plug(:accepts, ["html"])
     plug(:fetch_session)
@@ -10,12 +14,12 @@ defmodule JarvisWeb.Router do
     plug(:put_secure_browser_headers)
   end
 
-  pipeline :api do
-    plug(:accepts, ["json"])
+  pipeline :authenticated do
+    plug(Authenticated)
   end
 
   scope "/auth", JarvisWeb do
-    pipe_through([:browser])
+    pipe_through(:browser)
 
     get("/new", AuthController, :new)
 
@@ -26,19 +30,11 @@ defmodule JarvisWeb.Router do
   end
 
   scope "/", JarvisWeb do
-    pipe_through(:browser)
+    pipe_through([:browser, :authenticated])
 
     get("/", HomeController, :index)
 
     live("/live", PageLive, :index)
-  end
-
-  if Mix.env() in [:dev, :test] do
-    import Phoenix.LiveDashboard.Router
-
-    scope "/" do
-      pipe_through(:browser)
-      live_dashboard("/dashboard", metrics: JarvisWeb.Telemetry)
-    end
+    live_dashboard("/dashboard", metrics: JarvisWeb.Telemetry)
   end
 end

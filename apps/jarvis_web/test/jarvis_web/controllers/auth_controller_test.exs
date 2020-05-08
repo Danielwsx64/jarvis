@@ -18,13 +18,13 @@ defmodule JarvisWeb.AuthControllerTest do
     test "clear session and redirect", %{conn: conn} do
       response =
         conn
-        |> init_test_session(current_user: "someuser")
+        |> init_test_session(user_id: "someuser")
         |> delete(auth_path(conn, :delete))
 
       assert redirected_to(response, 302) =~ "/auth/new"
       assert get_flash(response, :info) == "You have been logged out!"
 
-      refute Map.has_key?(response.private.plug_session, "current_user")
+      refute Map.has_key?(response.private.plug_session, "user_id")
     end
   end
 
@@ -69,7 +69,7 @@ defmodule JarvisWeb.AuthControllerTest do
 
       assert redirected_to(response, 302) =~ "/"
       assert get_flash(response, :info) == "Successfully authenticated."
-      assert response.private.plug_session["current_user"] == user.id
+      assert response.private.plug_session["user_id"] == user.id
     end
 
     test "create a new user when success authenticate with new email", %{conn: conn} do
@@ -102,7 +102,7 @@ defmodule JarvisWeb.AuthControllerTest do
 
       assert redirected_to(response, 302) =~ "/"
       assert get_flash(response, :info) == "Successfully authenticated."
-      assert user_id = response.private.plug_session["current_user"]
+      assert user_id = response.private.plug_session["user_id"]
       assert Repo.get(Schema, user_id)
     end
 

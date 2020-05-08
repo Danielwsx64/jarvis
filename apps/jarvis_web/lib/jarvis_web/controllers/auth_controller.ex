@@ -36,7 +36,7 @@ defmodule JarvisWeb.AuthController do
   defp handle_authentication({:ok, user}, conn) do
     conn
     |> put_flash(:info, "Successfully authenticated.")
-    |> put_session(:current_user, user.id)
+    |> put_session(:user_id, user.id)
     |> configure_session(renew: true)
     |> redirect(to: Routes.home_path(conn, :index))
   end
